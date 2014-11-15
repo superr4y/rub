@@ -11,6 +11,7 @@ class RC4:
         for i in range(0,2**self.n):
             j = (j+self.s[i] + self.k[i % len(self.k)]) % 2**self.n
             self.s[i], self.s[j] = self.s[j], self.s[i]
+        print self
 
     def encrypt(self, plain):
         ret = []
@@ -25,6 +26,9 @@ class RC4:
             count += 1
             ret.append(r ^ ord(p))
         return ret
+
+    def __str__(self):
+        return "s: " + ", ".join(map(lambda e: str(e), self.s))
         
 
 obj = RC4([4, 7, 2, 3, 1], 3)        
