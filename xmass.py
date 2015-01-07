@@ -1,0 +1,5 @@
+import re                                                                                                                                                                                     
+c = 0b10010010010101001001101011011000011000001010010011010010100111011101111000111101101111111101110001100110101001011110101011001101111101100110111010010011110010100010100011111000110001001000010111001111011101111000000111111000011001001010011110101101                                                                                                                              
+c, p = map(lambda x: int(x, 16), re.findall(r'..', hex(c)[2:-1])), map(lambda x: ord(x), '<WhatsApp>')                                                                                        
+key_stream = [x^y for x,y in zip(p, c)]                                                                                                                                                       
+print "Periodenlaenge des LFSR ist 64 bit lang\n\n[+]Startzustand: 0x%s\n[+]Plaintext %s"%("".join(map(lambda x: hex(x)[2:], key_stream)), "".join([chr(c[i] ^ key_stream[i%8]) for i in range(len(c))]))

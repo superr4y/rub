@@ -467,6 +467,7 @@ class des(_baseDes):
     def __create_sub_keys(self):
         """Create the 16 subkeys K[1] to K[16] from the given key"""
         key = self.__permutate(des.__pc1, self.__String_to_BitList(self.getKey()))
+        print key    
         i = 0
         # Split into Left and Right sections
         self.L = key[:28]
@@ -699,12 +700,38 @@ class des(_baseDes):
         data = self.crypt(data, des.DECRYPT)
         return self._unpadData(data, pad, padmode)
 
+    def ip_permutation(self):
+        #print self.__permutate(des.__pc1, key) 
+        for l in self.Kn:
+            print "".join(map(lambda x: str(x), l))
+        print ""
+        #x = [i for i in range(1,65)]
+        #xp = self.__permutate(des.__ip, x)
+        #xp_i = self.__permutate(des.__fp, xp)
+        #for i in range(0,64): 
+        #    print "$x_{%d} \\longrightarrow x_{%d} \\longrightarrow x_{%d}$\\\\"%(x[i], xp[i], xp_i[i])
+        
+
+
 
 def main():
-    obj = des("\x00"*8)
-    plain = "\x00"*3 + chr(0b10000000) + "\x00"*4
-    #print_bin(plain) 
-    print_bin(obj.encrypt(plain))
+    #obj = des("\x00"*8)
+    #plain = "\x00"*3 + chr(0b10000000) + "\x00"*4
+    ##print_bin(plain) 
+    #print_bin(obj.encrypt(plain))
+
+    #obj = des("\x00"*8)
+    #obj.ip_permutation()
+    obj = des("\x01"*8)
+    obj.ip_permutation()
+    obj = des("\xE0"*8)
+    obj.ip_permutation()
+    obj = des("\x1f"*8)
+    obj.ip_permutation()
+    obj = des("\xFE"*8)
+    obj.ip_permutation()
+
+
 
 if __name__ == "__main__":
     main()
